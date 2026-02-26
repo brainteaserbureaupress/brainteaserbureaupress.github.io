@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brainteaser Bureau Press — Monthly Puzzle Books for Adults & Seniors</title>
+  <meta name="description" content="Monthly puzzle books for adults and seniors. Extra-large print number search and word search books, designed to keep your mind sharp." />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* =====================================================
+       VARIABLES — Update colors here if branding changes
+       ===================================================== */
+    :root {
+      --navy:       #0F2645;
+      --navy-light: #1B3A6B;
+      --gold:       #E8A020;
+      --gold-light: #F5C05A;
+      --bg:         #F7F8FA;
+      --white:      #FFFFFF;
+      --gray-100:   #F0F2F5;
+      --gray-300:   #C8CDD6;
+      --gray-600:   #5C6475;
+      --text:       #1A1F2E;
+      --radius:     12px;
+    }
+
+    /* =====================================================
+       RESET & BASE
+       ===================================================== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 17px;
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    img { max-width: 100%; display: block; }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* =====================================================
+       HEADER
+       ===================================================== */
+    header {
+      background: var(--navy);
+      color: var(--white);
+      padding: 64px 24px 72px;
+      text-align: center;
+    }
+
+    /* UPDATE: Replace this block with a real <img> logo when available */
+    .brand-logo-placeholder {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .brand-icon {
+      width: 52px;
+      height: 52px;
+      background: var(--gold);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+    }
+
+    .brand-name {
+      font-family: 'Merriweather', serif;
+      font-size: clamp(1.6rem, 4vw, 2.6rem);
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      line-height: 1.15;
+      text-align: left;
+    }
+
+    .brand-name span {
+      color: var(--gold);
+    }
+
+    .tagline {
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      color: rgba(255,255,255,0.80);
+      max-width: 520px;
+      margin: 0 auto 36px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 16px 36px;
+      border-radius: var(--radius);
+      font-weight: 600;
+      font-size: 1rem;
+      transition: transform 0.15s, box-shadow 0.15s;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+    }
+
+    .btn-gold {
+      background: var(--gold);
+      color: var(--navy);
+    }
+
+    .btn-outline {
+      border: 2px solid rgba(255,255,255,0.5);
+      color: var(--white);
+      padding: 14px 28px;
+    }
+
+    .btn-outline:hover {
+      border-color: var(--white);
+      background: rgba(255,255,255,0.08);
+    }
+
+    /* =====================================================
+       SERIES SECTION
+       ===================================================== */
+    .section {
+      padding: 72px 0;
+    }
+
+    .section-label {
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      text-align: center;
+      font-family: 'Merriweather', serif;
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 48px;
+    }
+
+    .series-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 28px;
+    }
+
+    .series-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 36px 32px;
+      box-shadow: 0 2px 12px rgba(15,38,69,0.08);
+      border-top: 4px solid var(--navy);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .series-card.coming-soon {
+      border-top-color: var(--gold);
+      opacity: 0.92;
+    }
+
+    .series-badge {
+      display: inline-block;
+      background: var(--navy);
+      color: var(--white);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 20px;
+      width: fit-content;
+    }
+
+    .series-badge.badge-soon {
+      background: var(--gold);
+      color: var(--navy);
+    }
+
+    .series-icon {
+      font-size: 2.4rem;
+    }
+
+    .series-card h3 {
+      font-family: 'Merriweather', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1.3;
+    }
+
+    .series-card p {
+      color: var(--gray-600);
+      font-size: 0.95rem;
+      flex-grow: 1;
+    }
+
+    .series-card .btn-series {
+      display: inline-block;
+      background: var(--navy);
+      color: var(--white);
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-align: center;
+      transition: background 0.15s, transform 0.15s;
+    }
+
+    .series-card .btn-series:hover {
+      background: var(--navy-light);
+      transform: translateY(-1px);
+    }
+
+    .series-card .btn-series.disabled {
+      background: var(--gray-300);
+      color: var(--gray-600);
+      cursor: default;
+      pointer-events: none;
+    }
+
+    /* =====================================================
+       ABOUT SECTION
+       ===================================================== */
+    .about-section {
+      background: var(--navy);
+      color: var(--white);
+      padding: 72px 0;
+      text-align: center;
+    }
+
+    .about-section .section-title {
+      color: var(--white);
+    }
+
+    .about-text {
+      max-width: 640px;
+      margin: 0 auto 40px;
+      color: rgba(255,255,255,0.82);
+      font-size: 1.05rem;
+      line-height: 1.75;
+    }
+
+    /* =====================================================
+       FEATURES / WHY
+       ===================================================== */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 24px;
+      margin-top: 16px;
+    }
+
+    .feature-item {
+      background: rgba(255,255,255,0.07);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      text-align: center;
+    }
+
+    .feature-item .feature-icon {
+      font-size: 2rem;
+      margin-bottom: 12px;
+    }
+
+    .feature-item h4 {
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--gold);
+    }
+
+    .feature-item p {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.70);
+    }
+
+    /* =====================================================
+       SOCIAL / FOLLOW SECTION
+       ===================================================== */
+    .social-section {
+      background: var(--gold);
+      padding: 56px 0;
+      text-align: center;
+    }
+
+    .social-section .section-title {
+      color: var(--navy);
+      margin-bottom: 24px;
+    }
+
+    .social-section p {
+      color: var(--navy);
+      opacity: 0.80;
+      margin-bottom: 32px;
+      font-size: 1rem;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .social-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--navy);
+      color: var(--white);
+      padding: 14px 28px;
+      border-radius: var(--radius);
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+
+    .social-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(15,38,69,0.30);
+    }
+
+    .social-btn svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+    }
+
+    /* =====================================================
+       FOOTER
+       ===================================================== */
+    footer {
+      background: #07192E;
+      color: rgba(255,255,255,0.55);
+      padding: 36px 24px;
+      text-align: center;
+      font-size: 0.85rem;
+    }
+
+    footer a {
+      color: var(--gold-light);
+    }
+
+    footer a:hover {
+      color: var(--gold);
+    }
+
+    footer .footer-inner {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      align-items: center;
+    }
+
+    /* =====================================================
+       RESPONSIVE
+       ===================================================== */
+    @media (max-width: 600px) {
+      header { padding: 48px 20px 56px; }
+      .brand-logo-placeholder { flex-direction: column; text-align: center; }
+      .brand-name { text-align: center; }
+      .series-card { padding: 28px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- =====================================================
+       HEADER
+       ===================================================== -->
+  <header>
+    <!-- UPDATE: When logo is ready, replace .brand-logo-placeholder with <img src="logo.png" alt="Brainteaser Bureau Press"> -->
+    <div class="brand-logo-placeholder">
+      <div class="brand-icon">🧠</div>
+      <div class="brand-name">
+        Brainteaser<br /><span>Bureau Press</span>
+      </div>
+    </div>
+
+    <p class="tagline">Monthly puzzle books for adults &amp; seniors — keep your mind sharp, one puzzle at a time.</p>
+
+    <!-- UPDATE: This link goes to the Amazon store page. Update if the URL changes. -->
+    <a class="btn btn-gold"
+       href="https://www.amazon.com/s?i=stripbooks&rh=p_27%3ABrainteaser%2BBureau%2BPress"
+       target="_blank" rel="noopener">
+      Find us on Amazon
+    </a>
+  </header>
+
+
+  <!-- =====================================================
+       SERIES
+       ===================================================== -->
+  <section class="section" id="series">
+    <div class="container">
+      <p class="section-label">Our collections</p>
+      <h2 class="section-title">Monthly Puzzle Series</h2>
+
+      <div class="series-grid">
+
+        <!-- SERIES 1: Number Search — ACTIVE -->
+        <div class="series-card">
+          <span class="series-badge">Active · Monthly</span>
+          <div class="series-icon">🔢</div>
+          <h3>Extra Large Number Search</h3>
+          <p>
+            100 extra-large number search puzzles per edition.
+            A new book every month — perfect for adults and seniors who want
+            a real mental challenge with comfortable, easy-to-read digits.
+          </p>
+          <!-- UPDATE: Replace href with the current month's Amazon link — amazon.com/dp/[ASIN] -->
+          <a class="btn-series"
+             href="https://www.amazon.com/stores/Brainteaser-Bureau-Press/author/B0GPLGYJKC"
+             target="_blank" rel="noopener">
+            View on Amazon →
+          </a>
+        </div>
+
+        <!-- SERIES 2: Word Search — COMING APRIL 2026 -->
+        <div class="series-card coming-soon">
+          <span class="series-badge badge-soon">Coming April 2026</span>
+          <div class="series-icon">🔤</div>
+          <h3>Extra Large Word Search</h3>
+          <p>
+            100 extra-large word search puzzles per edition.
+            Our brand-new monthly series launches in April 2026 —
+            the same brain-training philosophy, now with words.
+          </p>
+          <!-- UPDATE: When April 2026 book is live, replace with amazon.com/dp/[ASIN] and remove "disabled" class -->
+          <span class="btn-series disabled">Coming soon</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =====================================================
+       ABOUT
+       ===================================================== -->
+  <section class="about-section" id="about">
+    <div class="container">
+      <p class="section-label" style="color: var(--gold-light);">Who we are</p>
+      <h2 class="section-title">About Brainteaser Bureau Press</h2>
+
+      <!-- UPDATE: Adjust this bio if the brand description changes -->
+      <p class="about-text">
+        At Brainteaser Bureau Press, we create puzzle books — number search and word search —
+        designed to keep adults and seniors mentally sharp. Our monthly editions are crafted
+        to challenge your mind, improve focus, and provide moments of real enjoyment.
+      </p>
+
+      <div class="features-grid">
+        <div class="feature-item">
+          <div class="feature-icon">🔍</div>
+          <h4>Extra-large print</h4>
+          <p>Designed for comfortable reading, even with tired eyes.</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">📅</div>
+          <h4>New every month</h4>
+          <p>Fresh challenges delivered monthly — a year-round habit for a sharper mind.</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">🧩</div>
+          <h4>100 puzzles per book</h4>
+          <p>Weeks of entertainment in every edition.</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">🎁</div>
+          <h4>Perfect gift</h4>
+          <p>A meaningful present for any puzzle lover in your life.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =====================================================
+       FOLLOW / SOCIAL
+       ===================================================== -->
+  <section class="social-section" id="follow">
+    <div class="container">
+      <h2 class="section-title">Stay updated</h2>
+      <p>Follow us to be the first to know about new releases and free puzzles.</p>
+
+      <div class="social-links">
+        <!-- Twitter / X -->
+        <a class="social-btn"
+           href="https://x.com/BrainteaserPro"
+           target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.259 5.631 5.905-5.631Zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77Z"/>
+          </svg>
+          Follow @BrainteaserPro
+        </a>
+
+        <!-- Amazon Author Page -->
+        <!-- UPDATE: This is the Author Central URL — update if it changes -->
+        <a class="social-btn"
+           href="https://www.amazon.com/stores/Brainteaser-Bureau-Press/author/B0GPLGYJKC"
+           target="_blank" rel="noopener">
+          <!-- Amazon icon -->
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M13.958 10.09c0 1.232.029 2.256-.59 3.351-.502.891-1.301 1.438-2.186 1.438-1.214 0-1.922-.924-1.922-2.292 0-2.692 2.415-3.182 4.698-3.182v.685zm3.186 7.705a.661.661 0 01-.76.074c-1.068-.886-1.26-1.298-1.847-2.141-1.764 1.8-3.014 2.337-5.301 2.337-2.707 0-4.818-1.671-4.818-5.012 0-2.612 1.415-4.391 3.428-5.262 1.748-.77 4.188-.908 6.053-1.12v-.418c0-.769.06-1.676-.392-2.338-.395-.591-1.148-.836-1.812-.836-1.231 0-2.33.633-2.6 1.943-.055.292-.27.58-.567.595l-3.167-.34c-.267-.06-.563-.275-.486-.683C5.674 2.55 8.71 1.5 11.44 1.5c1.396 0 3.22.372 4.322 1.43 1.399 1.305 1.266 3.046 1.266 4.942v4.474c0 1.344.558 1.937 1.083 2.663.184.259.224.57-.01.762l-2.957 2.024zm3.51 1.539C19.318 20.97 16.352 22.5 13.124 22.5c-4.333 0-7.666-1.849-9.787-4.497-.298-.38.032-.568.329-.302 2.696 2.196 6.197 3.516 9.73 3.516 2.386 0 5.009-.495 7.425-1.523.364-.154.67.239.333.66zm.95-2.105c-.405-.52-2.675-.246-3.695-.124-.31.038-.358-.232-.079-.427 1.81-1.272 4.778-.905 5.125-.479.347.428-.091 3.397-1.791 4.814-.26.218-.509.102-.393-.186.382-.955 1.238-3.078.833-3.598z"/>
+          </svg>
+          View on Amazon
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =====================================================
+       FOOTER
+       ===================================================== -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <p>
+          <!-- UPDATE: Update the year each January -->
+          &copy; 2026 Brainteaser Bureau Press. All rights reserved.
+        </p>
+        <p>
+          Contact:
+          <!-- UPDATE: Update email if it changes -->
+          <a href="mailto:BrainteaserBureauPress@yahoo.com">BrainteaserBureauPress@yahoo.com</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
